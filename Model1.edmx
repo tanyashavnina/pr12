@@ -1,0 +1,285 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище SDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Бренд">
+          <Key>
+            <PropertyRef Name="id Бренда" />
+          </Key>
+          <Property Name="id Бренда" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Название бренда" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Паспортные данные">
+          <Key>
+            <PropertyRef Name="id Паспортные данные" />
+          </Key>
+          <Property Name="id Паспортные данные" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Серия" Type="nvarchar" MaxLength="50" />
+          <Property Name="Номер" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Сотрудники">
+          <Key>
+            <PropertyRef Name="id Сотрудника" />
+          </Key>
+          <Property Name="id Сотрудника" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Фамилия" Type="nvarchar" MaxLength="50" />
+          <Property Name="Имя" Type="nvarchar" MaxLength="50" />
+          <Property Name="Отчество" Type="nvarchar" MaxLength="50" />
+          <Property Name="Дата Рождения" Type="date" />
+          <Property Name="Номер телефона" Type="nvarchar" MaxLength="50" />
+          <Property Name="Паспортные данные" Type="int" />
+          <Property Name="Зарплата" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Товар">
+          <Key>
+            <PropertyRef Name="id Товара" />
+          </Key>
+          <Property Name="id Товара" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Тип часов" Type="nvarchar" MaxLength="50" />
+          <Property Name="Количество" Type="nvarchar" MaxLength="50" />
+          <Property Name="Вес" Type="nvarchar" MaxLength="50" />
+          <Property Name="Цена" Type="nvarchar" MaxLength="50" />
+          <Property Name="Сотрудник" Type="int" />
+          <Property Name="Механические/электрические" Type="nvarchar" MaxLength="50" />
+          <Property Name="Бренд" Type="int" />
+          <Property Name="Модель" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Сотрудники_Паспортные данные">
+          <End Role="Паспортные данные" Type="Self.Паспортные данные" Multiplicity="1" />
+          <End Role="Сотрудники" Type="Self.Сотрудники" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Паспортные данные">
+              <PropertyRef Name="id Паспортные данные" />
+            </Principal>
+            <Dependent Role="Сотрудники">
+              <PropertyRef Name="id Сотрудника" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Товар_Бренд">
+          <End Role="Бренд" Type="Self.Бренд" Multiplicity="0..1" />
+          <End Role="Товар" Type="Self.Товар" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Бренд">
+              <PropertyRef Name="id Бренда" />
+            </Principal>
+            <Dependent Role="Товар">
+              <PropertyRef Name="Бренд" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Товар_Сотрудники">
+          <End Role="Сотрудники" Type="Self.Сотрудники" Multiplicity="0..1" />
+          <End Role="Товар" Type="Self.Товар" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сотрудники">
+              <PropertyRef Name="id Сотрудника" />
+            </Principal>
+            <Dependent Role="Товар">
+              <PropertyRef Name="Сотрудник" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище SDBModelContainer">
+          <EntitySet Name="Бренд" EntityType="Self.Бренд" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Паспортные данные" EntityType="Self.Паспортные данные" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Сотрудники" EntityType="Self.Сотрудники" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Товар" EntityType="Self.Товар" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Сотрудники_Паспортные данные" Association="Self.FK_Сотрудники_Паспортные данные">
+            <End Role="Паспортные данные" EntitySet="Паспортные данные" />
+            <End Role="Сотрудники" EntitySet="Сотрудники" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Товар_Бренд" Association="Self.FK_Товар_Бренд">
+            <End Role="Бренд" EntitySet="Бренд" />
+            <End Role="Товар" EntitySet="Товар" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Товар_Сотрудники" Association="Self.FK_Товар_Сотрудники">
+            <End Role="Сотрудники" EntitySet="Сотрудники" />
+            <End Role="Товар" EntitySet="Товар" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="SDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Бренд" EntityType="SDBModel.Бренд" />
+          <EntitySet Name="Паспортные_данные" EntityType="SDBModel.Паспортные_данные" />
+          <EntitySet Name="Сотрудники" EntityType="SDBModel.Сотрудники" />
+          <EntitySet Name="Товар" EntityType="SDBModel.Товар" />
+          <AssociationSet Name="FK_Товар_Бренд" Association="SDBModel.FK_Товар_Бренд">
+            <End Role="Бренд" EntitySet="Бренд" />
+            <End Role="Товар" EntitySet="Товар" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Сотрудники_Паспортные_данные" Association="SDBModel.FK_Сотрудники_Паспортные_данные">
+            <End Role="Паспортные_данные" EntitySet="Паспортные_данные" />
+            <End Role="Сотрудники" EntitySet="Сотрудники" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Товар_Сотрудники" Association="SDBModel.FK_Товар_Сотрудники">
+            <End Role="Сотрудники" EntitySet="Сотрудники" />
+            <End Role="Товар" EntitySet="Товар" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Бренд">
+          <Key>
+            <PropertyRef Name="id_Бренда" />
+          </Key>
+          <Property Name="id_Бренда" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Название_бренда" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Товар" Relationship="SDBModel.FK_Товар_Бренд" FromRole="Бренд" ToRole="Товар" />
+        </EntityType>
+        <EntityType Name="Паспортные_данные">
+          <Key>
+            <PropertyRef Name="id_Паспортные_данные" />
+          </Key>
+          <Property Name="id_Паспортные_данные" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Серия" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Номер" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Сотрудники" Relationship="SDBModel.FK_Сотрудники_Паспортные_данные" FromRole="Паспортные_данные" ToRole="Сотрудники" />
+        </EntityType>
+        <EntityType Name="Сотрудники">
+          <Key>
+            <PropertyRef Name="id_Сотрудника" />
+          </Key>
+          <Property Name="id_Сотрудника" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Фамилия" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Имя" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Отчество" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Дата_Рождения" Type="DateTime" Precision="0" />
+          <Property Name="Номер_телефона" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Паспортные_данные" Type="Int32" />
+          <Property Name="Зарплата" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Паспортные_данные1" Relationship="SDBModel.FK_Сотрудники_Паспортные_данные" FromRole="Сотрудники" ToRole="Паспортные_данные" />
+          <NavigationProperty Name="Товар" Relationship="SDBModel.FK_Товар_Сотрудники" FromRole="Сотрудники" ToRole="Товар" />
+        </EntityType>
+        <EntityType Name="Товар">
+          <Key>
+            <PropertyRef Name="id_Товара" />
+          </Key>
+          <Property Name="id_Товара" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Тип_часов" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Количество" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Вес" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Цена" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Сотрудник" Type="Int32" />
+          <Property Name="Механические_электрические" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Бренд" Type="Int32" />
+          <Property Name="Модель" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Бренд1" Relationship="SDBModel.FK_Товар_Бренд" FromRole="Товар" ToRole="Бренд" />
+          <NavigationProperty Name="Сотрудники" Relationship="SDBModel.FK_Товар_Сотрудники" FromRole="Товар" ToRole="Сотрудники" />
+        </EntityType>
+        <Association Name="FK_Товар_Бренд">
+          <End Type="SDBModel.Бренд" Role="Бренд" Multiplicity="0..1" />
+          <End Type="SDBModel.Товар" Role="Товар" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Бренд">
+              <PropertyRef Name="id_Бренда" />
+            </Principal>
+            <Dependent Role="Товар">
+              <PropertyRef Name="Бренд" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Сотрудники_Паспортные_данные">
+          <End Type="SDBModel.Паспортные_данные" Role="Паспортные_данные" Multiplicity="1" />
+          <End Type="SDBModel.Сотрудники" Role="Сотрудники" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Паспортные_данные">
+              <PropertyRef Name="id_Паспортные_данные" />
+            </Principal>
+            <Dependent Role="Сотрудники">
+              <PropertyRef Name="id_Сотрудника" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Товар_Сотрудники">
+          <End Type="SDBModel.Сотрудники" Role="Сотрудники" Multiplicity="0..1" />
+          <End Type="SDBModel.Товар" Role="Товар" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сотрудники">
+              <PropertyRef Name="id_Сотрудника" />
+            </Principal>
+            <Dependent Role="Товар">
+              <PropertyRef Name="Сотрудник" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище SDBModelContainer" CdmEntityContainer="SDBEntities">
+          <EntitySetMapping Name="Бренд">
+            <EntityTypeMapping TypeName="SDBModel.Бренд">
+              <MappingFragment StoreEntitySet="Бренд">
+                <ScalarProperty Name="Название_бренда" ColumnName="Название бренда" />
+                <ScalarProperty Name="id_Бренда" ColumnName="id Бренда" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Паспортные_данные">
+            <EntityTypeMapping TypeName="SDBModel.Паспортные_данные">
+              <MappingFragment StoreEntitySet="Паспортные данные">
+                <ScalarProperty Name="Номер" ColumnName="Номер" />
+                <ScalarProperty Name="Серия" ColumnName="Серия" />
+                <ScalarProperty Name="id_Паспортные_данные" ColumnName="id Паспортные данные" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Сотрудники">
+            <EntityTypeMapping TypeName="SDBModel.Сотрудники">
+              <MappingFragment StoreEntitySet="Сотрудники">
+                <ScalarProperty Name="Зарплата" ColumnName="Зарплата" />
+                <ScalarProperty Name="Паспортные_данные" ColumnName="Паспортные данные" />
+                <ScalarProperty Name="Номер_телефона" ColumnName="Номер телефона" />
+                <ScalarProperty Name="Дата_Рождения" ColumnName="Дата Рождения" />
+                <ScalarProperty Name="Отчество" ColumnName="Отчество" />
+                <ScalarProperty Name="Имя" ColumnName="Имя" />
+                <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+                <ScalarProperty Name="id_Сотрудника" ColumnName="id Сотрудника" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Товар">
+            <EntityTypeMapping TypeName="SDBModel.Товар">
+              <MappingFragment StoreEntitySet="Товар">
+                <ScalarProperty Name="Модель" ColumnName="Модель" />
+                <ScalarProperty Name="Бренд" ColumnName="Бренд" />
+                <ScalarProperty Name="Механические_электрические" ColumnName="Механические/электрические" />
+                <ScalarProperty Name="Сотрудник" ColumnName="Сотрудник" />
+                <ScalarProperty Name="Цена" ColumnName="Цена" />
+                <ScalarProperty Name="Вес" ColumnName="Вес" />
+                <ScalarProperty Name="Количество" ColumnName="Количество" />
+                <ScalarProperty Name="Тип_часов" ColumnName="Тип часов" />
+                <ScalarProperty Name="id_Товара" ColumnName="id Товара" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

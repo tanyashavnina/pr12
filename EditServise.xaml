@@ -1,0 +1,42 @@
+﻿<Window x:Class="Praktika.EditServise"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Praktika"
+        mc:Ignorable="d"
+        Title="EditServise" Height="486" Width="368" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.51,1" StartPoint="0.51,0">
+                <GradientStop Color="#FFFFFF" Offset="0"/>
+                <GradientStop Color="#87CEFA" Offset="0.52"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Button Style="{StaticResource AddButon}" Content="Изменить" Height="35" Width="100" HorizontalAlignment="Left" Margin="49,392,0,0" VerticalAlignment="Top" Click="btnAdd" />
+        <Button Style="{StaticResource AddButon}" Content="Назад" Height="35" Width="100" HorizontalAlignment="Left" Margin="210,392,0,0" VerticalAlignment="Top" Click="btnBack" />
+        <Label Content="Редактирование" HorizontalAlignment="Left" Margin="96,25,0,0" VerticalAlignment="Top" Height="40" Width="224" FontSize="22" />
+        <TextBox  x:Name="id_Товара" Text = "{Binding id_Товара}"   HorizontalAlignment="Left" Margin="177,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
+        <TextBox x:Name="Тип_часов" Text = "{Binding Тип_часов}"  HorizontalAlignment="Left" Margin="177,101,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="Количество" Text = "{Binding Количество}"  HorizontalAlignment="Left" Margin="176,131,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="Цена" Text = "{Binding Цена}"  HorizontalAlignment="Left" Margin="181,185,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="id_Товара"  HorizontalAlignment="Left" Margin="100,83,0,0" VerticalAlignment="Top"/>
+        <Label Content="Тип_часов" HorizontalAlignment="Left" Margin="96,109,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.534,3.059"/>
+        <Label Content="Количество" HorizontalAlignment="Left" Margin="92,139,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.448,4.51"/>
+        <Label Content="Цена" HorizontalAlignment="Left" Margin="104,197,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.554,1.165"/>
+        <TextBox x:Name="Вес" Text = "{Binding Вес}" HorizontalAlignment="Left" Margin="180,155,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="121"/>
+        <Label Content="Вес" HorizontalAlignment="Left" Margin="108,163,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.448,4.51"/>
+        <TextBox Text = "{Binding Photo.PhotoPath}" HorizontalAlignment="Left" Margin="148,280,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Visibility="Hidden"/>
+        <Label Content="Бренд" HorizontalAlignment="Left" Margin="112,296,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.540,2.180"/>
+        <TextBox x:Name="Бренд" Text = "{Binding Бренд}"  HorizontalAlignment="Left" Margin="189,287,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Модель" HorizontalAlignment="Left" Margin="111,325,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.540,2.180"/>
+        <TextBox x:Name="Модель" Text = "{Binding Модель}"  HorizontalAlignment="Left" Margin="189,317,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Механические_электрические" HorizontalAlignment="Left" Margin="10,266,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.540,2.180" Width="174"/>
+        <TextBox x:Name="Механические_электрические" Text = "{Binding Механические_электрические}"  HorizontalAlignment="Left" Margin="190,255,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Image Margin="0,4,277,375" Source="/V253GXSLML.jpg" Stretch="Fill"/>
+        <TextBox x:Name="Сотрудник" Text = "{Binding Сотрудник}" HorizontalAlignment="Left" Margin="181,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="121"/>
+        <Label Content="Сотрудник" HorizontalAlignment="Left" Margin="99,226,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.448,4.51"/>
+
+
+    </Grid>
+</Window>
